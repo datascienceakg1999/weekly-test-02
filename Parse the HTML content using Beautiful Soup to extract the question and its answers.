@@ -1,0 +1,14 @@
+import requests
+from bs4 import BeautifulSoup
+url = 'http://example.com'
+response = requests.get(url)
+if response.status_code == 200:
+html_content = response.text
+soup = BeautifulSoup(html_content, 'html.parser')
+question = soup.find('h1', class_='question-title').get_text(strip=True)
+answers = soup.find_all('div', class_='answer')
+print(f"Question: {question}")
+for index, answer in enumerate(answers, start=1):
+        print(f"Answer {index}: {answer.get_text(strip=True)}")
+else:
+    print(f"Failed to retrieve the webpage. Status code: {response.status_code}")
