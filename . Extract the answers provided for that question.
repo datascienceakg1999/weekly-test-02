@@ -1,0 +1,28 @@
+import requests
+from bs4 import BeautifulSoup
+url = 'https://stackoverflow.com/questions/415511/how-do-i-get-the-current-time-in-python?newreg=ce7c501fe03a4068bd28327ec769fe64.com'
+target_question_title = 'Your specific question title here'
+response = requests.get(url)
+if response.status_code == 200:
+   html_content = response.text
+   soup = BeautifulSoup(html_content, 'html.parser')
+   question_tag = soup.find('h1', string=target_question_title)
+    
+    if question_tag:
+       
+        question = question_tag.get_text(strip=True)
+        print(f"Question: {question}")
+      answers_container = question_tag.find_next('div', class_='answers-container')
+        
+        if answers_container:
+            answers = answers_container.find_all('div', class_='answer')
+            
+           
+            for index, answer in enumerate(answers, start=1):
+                print(f"Answer {index}: {answer.get_text(strip=True)}")
+        else:
+            print("No answers found for the specified question.")
+    else:
+        print("The specified question was not found.")
+else:
+    print(f"Failed to retrieve the webpage. Status code: {response.status_code}")
