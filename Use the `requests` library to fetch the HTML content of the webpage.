@@ -1,0 +1,15 @@
+import requests
+
+# URL of the webpage you want to fetch
+url = 'https://stackoverflow.com/questions/415511/how-do-i-get-the-current-time-in-python?newreg=ce7c501fe03a4068bd28327ec769fe64.com'
+
+# Sending a GET request to the URL
+response = requests.get(url)
+
+# Checking if the request was successful
+if response.status_code == 200:
+    # Fetching the HTML content of the webpage
+    html_content = response.text
+    print(html_content)
+else:
+    print(f"Failed to retrieve the webpage. Status code: {response.status_code}")
