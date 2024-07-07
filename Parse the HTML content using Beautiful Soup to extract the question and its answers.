@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-url = 'http://example.com'
+url = 'https://stackoverflow.com/questions/415511/how-do-i-get-the-current-time-in-python?newreg=ce7c501fe03a4068bd28327ec769fe64.com'
 response = requests.get(url)
 if response.status_code == 200:
 html_content = response.text
